@@ -2,6 +2,7 @@
 Go SDK for Wit.AI 
 
 ## wit CLI
+Installation and usage
 ```
 $ export GOPATH=$(pwd)
 $ export PATH=$PATH:$GOPATH/bin
