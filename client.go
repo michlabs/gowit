@@ -49,7 +49,7 @@ func (c *Client) Detect(text string) (Meaning, error) {
 	}
 
 	if err := json.Unmarshal(res, &m); err != nil {
-		fmt.Println(string(res))
+		fmt.Println("Failed to unmarshal response: ", string(res))
 		return m, err
 	}
 
@@ -120,7 +120,6 @@ func deleteValue(e *Entity, v *Value) error {
 	p.Method = "DELETE"
 	p.Path = "/entities/" + e.Name + "/values/" + v.Name
 	_, err := request(&p)
-	fmt.Println(p.Path)
 	return err
 }
 
