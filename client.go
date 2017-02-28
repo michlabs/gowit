@@ -153,15 +153,16 @@ func request(p *param) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	if res.StatusCode != 200 {
-		return nil, errors.New(http.StatusText(res.StatusCode))
-	}
 
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
 		return nil, err
 	}
 	defer res.Body.Close()
+
+	if res.StatusCode != 200 {
+		return nil, errors.New(http.StatusText(res.StatusCode) + ": " + string(body))
+	}
 
 	return body, nil
 }
