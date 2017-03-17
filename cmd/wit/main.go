@@ -78,7 +78,9 @@ func main() {
 
 	if testCmd.Parsed() {
 		if target == "intent" {
-			TestIntent()
+			if err := TestIntent(wit, inputFP); err != nil {
+				log.Fatal(err)
+			}
 		} else {
 			TestEntity()
 		}
@@ -98,7 +100,13 @@ Available commands and corresponding options:
 	  -token string
 	  		required, Wit.AI token
 
-	test <not implemented yet>
+	test
+	  -t string
+	    	required, type of training (intent, entity)
+	  -i string
+	    	required, path to your input file
+	  -token string
+	  		required, Wit.AI token
 
 	help
 `

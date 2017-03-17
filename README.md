@@ -9,9 +9,10 @@ $ export PATH=$PATH:$GOPATH/bin
 $ go get github.com/michlabs/gowit/cmd/wit
 $ wit help
 $ wit train -t intent -i training.csv -token <your_wit_token>
+$ wit test -t intent -i test.csv -token <your_wit_token>
 ```
 
-Training file must be a CSV file and in following format:
+training.csv and test.csv file must be a CSV file and in following format:
 ```
 intent_name1, intent utterance 1
 intent_name1, intent utterance 2
