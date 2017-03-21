@@ -98,16 +98,12 @@ func (c *Client) GetEntity(id string) (e Entity, err error) {
 }
 
 //Add a new expression for 'intent'
-func(c *Client) AddExpression(intent, sample string) error {
-	data := "{\"expression\":\""+sample+"\"}"
-
+func(c *Client) AddExpression(intent, expression string) error {
 	var p param
 	p.Method = "POST"
-	p.Path = "/entities/intent/values/" + intent+"/expressions"
-	p.Data = []byte(data)
-
-	fmt.Println("%v", p)
-
+	p.Path = "/entities/intent/values/" + intent + "/expressions"
+	p.Data = []byte(fmt.Sprintf(`{"expression": "%s"}`, expression))
+	
 	_, err := request(&p)
 	return err
 }
