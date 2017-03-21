@@ -97,6 +97,21 @@ func (c *Client) GetEntity(id string) (e Entity, err error) {
 	return parseEntity(res)
 }
 
+//Add a new expression for 'intent'
+func(c *Client) AddExpression(intent, sample string) error {
+	data := "{\"expression\":\""+sample+"\"}"
+
+	var p param
+	p.Method = "POST"
+	p.Path = "/entities/intent/values/" + intent+"/expressions"
+	p.Data = []byte(data)
+
+	fmt.Println("%v", p)
+
+	_, err := request(&p)
+	return err
+}
+
 // UpdateEntity updates an entity with the given attributes.
 func (c *Client) UpdateEntity(e *Entity) error {
 	data, err := json.Marshal(e)
