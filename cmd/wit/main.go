@@ -15,14 +15,10 @@ var token string
 
 func main() {
 	trainCmd := flag.NewFlagSet("train", flag.ExitOnError)
-	trainCmd.StringVar(&target, "t", "", "required, intent or entity")
-	trainCmd.StringVar(&inputFP, "i", "", "required, path to the input file")
-	trainCmd.StringVar(&token, "token", "", "required, Wit.AI token")
+	AddSharedFlags(trainCmd)
 
 	testCmd := flag.NewFlagSet("test", flag.ExitOnError)
-	testCmd.StringVar(&target, "t", "", "required, intent or entity")
-	testCmd.StringVar(&inputFP, "i", "", "required, path to the input file")
-	testCmd.StringVar(&token, "token", "", "required, Wit.AI token")
+	AddSharedFlags(testCmd)
 
 	if len(os.Args) < 2 {
 		fmt.Println("Error: Input is not enough")
@@ -85,6 +81,12 @@ func main() {
 			TestEntity()
 		}
 	}
+}
+
+func AddSharedFlags(fs *flag.FlagSet) {
+	fs.StringVar(&target, "t", "", "required, intent or entity")
+	fs.StringVar(&inputFP, "i", "", "required, path to the input file")
+	fs.StringVar(&token, "token", "", "required, Wit.AI token")
 }
 
 const helpMessage string = `
